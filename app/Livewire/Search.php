@@ -25,25 +25,31 @@ class Search extends Component
     public $limit = 50;
     public $skip = 0;
     public $last = false;
-    public $message = '';
+    public $errorMessages = [];
 
     private $apiUrl = 'https://npiregistry.cms.hhs.gov/api';
     private $apiVersion = '2.1';
 
     public function search() {
+        $this->errorMessages = [];
         $this->updateParams();
-        $this->message = sprintf('Submitting with skip: %d and limit: %d', $this->params['skip'], $this->params['limit']);
+        
         $response = Http::get($this->apiUrl, $this->params);
-        // dd($response);
         if (!$response->ok()) {
-            $this->errorStatus = $response->response->reasonPhrase;
+            $this->errorMessages[] = $response->response?->reasonPhrase ?? 'An unknown error occurred';
             return;
         }
         $this->apiDebug = $response->body();
 
         $result = $response->object();
         if (!empty($result->Errors)) {
-            dd($result->Errors);
+            // dd($result->Errors);
+            foreach ($result->Errors as $error) {
+                if (!empty($error->description)) {
+                    $this->errorMessages[] = $error->description;
+                }
+            }
+            return;
         }
         
         $this->count = $result->result_count ?? 0;
@@ -73,16 +79,20 @@ class Search extends Component
         
         $response = Http::get($this->apiUrl, $params);
         $result = $response->object('results');
-        // dd($this->params, $response, $result);
         $infoResults = $this->collectResults($result->results, true);
         $this->providerInfo = $infoResults[0] ?? null;
-        // dd($this->providerInfo);
+    }
+
+    public function clearField($field) {
+        $this->searchData[$field] = '';
+        $this->params[$field] = '';
     }
 
     public function resetData() {
         foreach ($this->searchData as $param => $value) {
             $this->searchData[$param] = '';
         }
+        
         $this->params = [];
         $this->results = [];
         $this->count = 0;
@@ -91,6 +101,7 @@ class Search extends Component
         $this->limit = 50;
         $this->skip = 0;
         $this->last = false;
+        $this->errorMessages = [];
     }
 
     public function render()
