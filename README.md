@@ -1,6 +1,6 @@
 # NPI Search
 
-This Laravel site searches the NPI registry located here: [](https://npiregistry.cms.hhs.gov/api-page)
+This Laravel site searches the NPI registry located here: [https://npiregistry.cms.hhs.gov/api-page](https://npiregistry.cms.hhs.gov/api-page)
 
 To run:
 
