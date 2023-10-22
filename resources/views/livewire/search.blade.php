@@ -180,33 +180,35 @@
                 <p>Reset All will clear all form fields and all results.</p>
             </div>
         </div>
-        <div class="result-list padded-container">
+        <div class="padded-container">
             <div class="heading">Search Results</div>
-            @if(count($results) > 0)
-                <div class="prev-next-block">
-                    @if($skip > 0)
-                        <button wire:click="previous">Previous</button>
-                    @endif
-                    @if($count === $limit)
-                        <button wire:click="next">Next</button>
-                    @endif
-                </div>
-                @foreach($results as $result)
-                    <div class="result-element" wire:click.prevent="showProvider({{ $result->number }})">
-                        {{$result->number}}: {{$result->name}}, {{$result->providerType}}, {{$result->providerState}}
+            <div class="result-list">
+                @if(count($results) > 0)
+                    <div class="prev-next-block">
+                        @if($skip > 0)
+                            <button wire:click="previous">Previous</button>
+                        @endif
+                        @if($count === $limit)
+                            <button wire:click="next">Next</button>
+                        @endif
                     </div>
-                @endforeach
-                <div class="prev-next-block">
-                    @if($skip > 0)
-                        <button wire:click="previous">Previous</button>
-                    @endif
-                    @if($count === $limit)
-                        <button wire:click="next">Next</button>
-                    @endif
-                </div>
-            @elseif($hasBeenSubmitted)
-                No results
-            @endif
+                    @foreach($results as $result)
+                        <div class="result-element" wire:click.prevent="showProvider({{ $result->number }})">
+                            {{$result->number}}: {{$result->name}}, {{$result->providerType}}, {{$result->providerState}}
+                        </div>
+                    @endforeach
+                    <div class="prev-next-block">
+                        @if($skip > 0)
+                            <button wire:click="previous">Previous</button>
+                        @endif
+                        @if($count === $limit)
+                            <button wire:click="next">Next</button>
+                        @endif
+                    </div>
+                @elseif($hasBeenSubmitted)
+                    No results
+                @endif
+            </div>
         </div>
     </div>
 </div>

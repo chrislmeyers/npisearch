@@ -103,6 +103,7 @@ button {
 .prev-next-block {
 	margin-top: 15px;
 	margin-bottom: 15px;
+	padding-right: 15px;
 	text-align: right;
 }
 
