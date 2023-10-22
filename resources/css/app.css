@@ -41,10 +41,6 @@ button {
 	padding: 15px;
 }
 
-.form-container {
-/*	width: 100%;*/
-}
-
 .form-field {
 	display: flex;
 	flex-direction: row;
