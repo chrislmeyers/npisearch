@@ -24,7 +24,6 @@ class Search extends Component
     public $params = [];
     public $limit = 50;
     public $skip = 0;
-    public $last = false;
     public $errorMessages = [];
 
     private $apiUrl = 'https://npiregistry.cms.hhs.gov/api';
@@ -100,7 +99,6 @@ class Search extends Component
         $this->hasBeenSubmitted = false;
         $this->limit = 50;
         $this->skip = 0;
-        $this->last = false;
         $this->errorMessages = [];
     }
 
@@ -126,7 +124,7 @@ class Search extends Component
         foreach ($results as $result) {
             $item = new \stdClass();
             $item->number = $result->number;
-            $item->name = sprintf('%s %s', $result->basic->first_name, $result->basic->last_name);
+            $item->name = sprintf('%s %s', $result->basic->first_name ?? '', $result->basic->last_name ?? '');
 
             $taxonomy = $result->taxonomies[0] ?? null;
             $item->providerType = $taxonomy?->desc ?? 'Empty';
