@@ -15,11 +15,21 @@
             <form wire:submit="search">
                 <div class="form-field">
                     <div class="form-label">
+                        <label for="organization_name">Organization Name:</label>
+                    </div>
+                    <div class="form-input">
+                        <input type="text" id="organization_name" wire:model="searchData.organization_name">
+                        <a wire:click="clearField('organization_name')">clear</a>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <div class="form-label">
                         <label for="first_name">First Name:</label>
                     </div>
                     <div class="form-input">
                         <input type="text" id="first_name" wire:model="searchData.first_name">
-                        <a href="#" wire:click="clearField('first_name')">clear</a>
+                        <a wire:click="clearField('first_name')">clear</a>
                     </div>
                 </div>
 
@@ -29,7 +39,7 @@
                     </div>
                     <div class="form-input">
                         <input type="text" id="last_name" wire:model="searchData.last_name">
-                        <a href="#" wire:click="clearField('last_name')">clear</a>
+                        <a wire:click="clearField('last_name')">clear</a>
                     </div>
                 </div>
 
@@ -39,7 +49,7 @@
                     </div>
                     <div class="form-input">
                         <input type="text" id="number" wire:model="searchData.number">
-                        <a href="#" wire:click="clearField('number')">clear</a>
+                        <a wire:click="clearField('number')">clear</a>
                     </div>
                 </div>
 
@@ -49,7 +59,7 @@
                     </div>
                     <div class="form-input">
                         <input type="text" id="taxonomy_description" wire:model="searchData.taxonomy_description">
-                        <a href="#" wire:click="clearField('taxonomy_description')">clear</a>
+                        <a wire:click="clearField('taxonomy_description')">clear</a>
                     </div>
                 </div>
 
@@ -59,7 +69,7 @@
                     </div>
                     <div class="form-input">
                         <input type="text" id="city" wire:model="searchData.city">
-                        <a href="#" wire:click="clearField('city')">clear</a>
+                        <a wire:click="clearField('city')">clear</a>
                     </div>
                 </div>
 
@@ -69,7 +79,7 @@
                     </div>
                     <div class="form-input">
                         <input type="text" id="state" wire:model="searchData.state">
-                        <a href="#" wire:click="clearField('state')">clear</a>
+                        <a wire:click="clearField('state')">clear</a>
                     </div>
                 </div>
 
@@ -79,11 +89,12 @@
                     </div>
                     <div class="form-input">
                         <input type="text" id="postal_code" wire:model="searchData.postal_code">
-                        <a href="#" wire:click="clearField('postal_code')">clear</a>
+                        <a wire:click="clearField('postal_code')">clear</a>
                     </div>
                 </div>
 
                 <div class="form-button">
+                    <div wire:loading>Working...</div>
                     <button type="button" wire:click="resetData">Reset All</button>
                     <button type="submit">Search</button>
                 </div>

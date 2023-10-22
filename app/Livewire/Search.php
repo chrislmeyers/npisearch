@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Http;
 class Search extends Component
 {
     public $searchData = [
+        'organization_name' => '',
         'first_name' => '',
         'last_name' => '',
         'number' => '',
@@ -16,7 +17,6 @@ class Search extends Component
         'state' => '',
         'postal_code' => '',
     ];
-    public $apiDebug = 'Nothing to see here';
     public $results = [];
     public $count = 0;
     public $providerInfo = null;
@@ -38,7 +38,6 @@ class Search extends Component
             $this->errorMessages[] = $response->response?->reasonPhrase ?? 'An unknown error occurred';
             return;
         }
-        $this->apiDebug = $response->body();
 
         $result = $response->object();
         if (!empty($result->Errors)) {
@@ -124,7 +123,11 @@ class Search extends Component
         foreach ($results as $result) {
             $item = new \stdClass();
             $item->number = $result->number;
-            $item->name = sprintf('%s %s', $result->basic->first_name ?? '', $result->basic->last_name ?? '');
+            if ($result->enumeration_type === 'NPI-2') {
+                $item->name = $result->basic->organization_name ?? '';
+            } else {
+                $item->name = sprintf('%s %s', $result->basic->first_name ?? '', $result->basic->last_name ?? '');
+            }
 
             $taxonomy = $result->taxonomies[0] ?? null;
             $item->providerType = $taxonomy?->desc ?? 'Empty';
