@@ -163,6 +163,23 @@
         @endif
     </div>
     <div id="right-container">
+        <div class="padded-container">
+            <div class="heading">NPI Search Instructions</div>
+            <div>
+                <p>
+                    To search for organizations, enter search criteria in the organization name field
+                    <br />To search for individuals, enter search criteria in first name and or last name
+                    <br />The above fields accept an asterisk (*) as a trailing wildcard
+                </p>
+                <p>
+                    If you have entered information in a field and wish it to be removed from the search criteria, click on "clear" next to that field.
+                </p>
+                <p>
+                    State must be a 2-character abbreviation and must be accompanied by at least one other field.
+                </p>
+                <p>Reset All will clear all form fields and all results.</p>
+            </div>
+        </div>
         <div class="result-list padded-container">
             <div class="heading">Search Results</div>
             @if(count($results) > 0)
