@@ -8,8 +8,7 @@ To run:
 - Clone the repository
 - `cd npisearch`
 - `composer install`
-- `cp .env.example .env`
-- `php artisan key:generate`
-- `sail up -d`
 - `npm install`
+- `cp .env.example .env`
+- `sail up -d`
 - `npm run dev`
